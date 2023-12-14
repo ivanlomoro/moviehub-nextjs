@@ -1,0 +1,35 @@
+.container-swiper {
+    z-index: 0;
+    position: relative;
+}
+
+.title-and-button-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.title-home {
+    color: var(--background-color-secondary);
+    text-align: center;
+}
+
+.icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+
+.add-icon {
+    margin: 0;
+    font-size: 2.5rem;
+    color: var(--text-color-secondary);
+    transition: color 0.2s;
+}
+
+.add-icon:hover {
+    color: var(--primary-color);
+    cursor: pointer;
+}

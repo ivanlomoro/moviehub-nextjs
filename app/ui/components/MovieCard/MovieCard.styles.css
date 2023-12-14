@@ -1,0 +1,73 @@
+.movie-card {
+  background-color: var(--background-color-secondary);
+  border: 3px solid var(--primary-color);
+  border-radius: 0.5rem;
+  display: flex;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  margin-top: 1rem;
+}
+
+.movie-card__image {
+  width: 150px;
+  height: 200px;
+  object-fit: cover;
+}
+
+.movie-card__info {
+  padding: 1rem;
+}
+
+.movie-card__title {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.movie-card__genre,
+.movie-card__score {
+  color: var(--secondary-color);
+  margin-bottom: 4px;
+}
+
+.movie-card__score {
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.delete-icon-trash {
+  margin-top: 0.5rem;
+  font-size: 1.2rem;
+  color: var(--background-color);
+  transition: color 0.2s;
+}
+
+.delete-icon-trash:hover{
+  color: var(--primary-color);
+  cursor: pointer;
+}
+
+.delete-button-trash{
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.edit-button{
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.edit-icon{
+  margin-top: 0.5rem;
+  font-size: 1.2rem;
+  color: var(--background-color);
+  transition: color 0.2s;
+}
+
+.edit-icon:hover{
+  color: var(--primary-color);
+  cursor: pointer;
+}
+
+
