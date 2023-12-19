@@ -17,10 +17,7 @@
 
 .img-icon-login {
     margin: 0;
-    width: 200px;
-    height: 200px;
     margin-top: -450px;
-    opacity: 0.8;
 }
 
 .login-btn {
@@ -29,8 +26,6 @@
 
 .login-btn {
     text-decoration: none;
-    margin-right: 1rem;
-    margin-top: 1rem;
     font-size: 20px;
     font-weight: bold;
     padding: 10px 20px;
@@ -42,7 +37,6 @@
     background: linear-gradient(50deg, var(--background-color), var(--background-color-secondary));
     transition: 0.5s;
     cursor: pointer;
-    opacity: 0.9;
 }
 
 .login-btn:hover {

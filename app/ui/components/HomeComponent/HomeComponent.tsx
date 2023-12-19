@@ -1,6 +1,5 @@
-// HomeComponent.tsx
+'use client'
 import React, { useEffect, useState } from 'react';
-import { useMovieContext } from '../../context/MovieContext';
 import MovieCard from '../MovieCard/MovieCard';
 import "./HomeComponent.styles.css";
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -8,10 +7,12 @@ import 'swiper/css';
 import { EffectCoverflow, Pagination } from 'swiper/modules';
 import Modal from '../Modal/Modal';
 import { FaCirclePlus } from "react-icons/fa6";
-import { deleteMovieById } from '../../services/movie.service';
 import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content'
 import EditForm from '../EditForm/EditForm';
 import Loader from '../Loader/Loader';
+import { deleteMovieById } from '@/services/movie.service';
+import { useMovieContext } from '@/context/MovieContext';
 
 const HomeComponent: React.FC = () => {
     const { movies, createMovie, fetchMovies } = useMovieContext();

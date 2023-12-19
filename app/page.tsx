@@ -1,5 +1,5 @@
-import Login from "../ui/components/Login/Login";
-import styles from './page.module.css'
+import Login from "./ui/components/Login/Login";
+
 export default function LoginPage() {
     return (
         <>

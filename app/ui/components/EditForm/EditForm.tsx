@@ -1,9 +1,10 @@
+'use client'
 import { useState, ChangeEvent, useEffect } from 'react';
-import { useMovieContext } from '../../context/MovieContext';
 import { IoMdClose } from 'react-icons/io';
 import './EditForm.styles.css';
-import { Movie, getMovieById, updateMovieById } from '../../services/movie.service';
 import { toast } from 'react-hot-toast';
+import { useMovieContext } from '@/context/MovieContext';
+import { Movie, getMovieById, updateMovieById } from '@/services/movie.service';
 
 interface EditFormProps {
   movieId: string | undefined;

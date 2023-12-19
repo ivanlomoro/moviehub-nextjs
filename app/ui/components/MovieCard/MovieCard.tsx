@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import './MovieCard.styles.css'
 import { FaTrash } from "react-icons/fa";
 import { FaEdit } from "react-icons/fa";
@@ -16,7 +17,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ title, genre, score, posterImage,
 
     return (
         <div className="movie-card">
-            <img src={posterImage} alt={title} className="movie-card__image" />
+            <Image src={posterImage} alt={title} className="movie-card__image" width={150} height={200} priority />
             <div className="movie-card__info">
                 <h2 className="movie-card__title">{title}</h2>
                 <p className="movie-card__genre">Genre: {genre}</p>

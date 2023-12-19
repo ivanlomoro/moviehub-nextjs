@@ -35,6 +35,7 @@
   outline: none;
   color: var(--background-color-secondary);
   font-size: 20px;
+  font-family: '__Akaya_Kanadaka_1a5521';
 }
 
 .edit-form input::placeholder {
@@ -55,6 +56,7 @@
   color: var(--background-color-secondary);
   font-size: 20px;
   appearance: none;
+  font-family: '__Akaya_Kanadaka_1a5521';
 }
 
 .edit-form select::after {
