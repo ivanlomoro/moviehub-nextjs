@@ -1,4 +1,3 @@
-'use client';
 import "./Login-styles.css";
 import Image from 'next/image';
 

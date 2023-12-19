@@ -1,9 +1,7 @@
 import { UserProvider } from '@auth0/nextjs-auth0/client';
 import './globals.css'
-import { Akaya_Kanadaka } from 'next/font/google'
 import { MovieProvider } from '@/context/MovieContext';
-
-export const akaya_kanadaka = Akaya_Kanadaka({ weight: "400", subsets: ['latin'] });
+import { akaya_kanadaka } from './fonts';
 
 export default function RootLayout({
   children,

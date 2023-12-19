@@ -1,3 +1,22 @@
+/* RESET */
+a,
+button,
+input,
+select,
+h1,
+h2,
+h3,
+h4,
+h5,
+* {
+  border: none;
+  text-decoration: none;
+  appearance: none;
+  background: none;
+  font-family: inherit;
+  scroll-behavior: smooth;
+}
+
 :root {
   --primary-color: #FF3B4B;
   --secondary-color: #677580;
@@ -7,15 +26,12 @@
   --text-color-secondary: white;
 }
 
+
 html,
 body {
   height: 100%;
   margin: 0;
   background-color: var(--background-color);
-}
-
-button{
-  font-family: inherit;
 }
 
 
