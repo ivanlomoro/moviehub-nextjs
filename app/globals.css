@@ -12,7 +12,7 @@ h5,
   border: none;
   text-decoration: none;
   appearance: none;
-  background: none;
+  background: none; 
   font-family: inherit;
   scroll-behavior: smooth;
 }

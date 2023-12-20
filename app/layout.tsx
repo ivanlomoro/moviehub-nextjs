@@ -2,6 +2,7 @@ import { UserProvider } from '@auth0/nextjs-auth0/client';
 import './globals.css'
 import { MovieProvider } from '@/context/MovieContext';
 import { akaya_kanadaka } from './fonts';
+import ToasterComponent from './ui/components/Toaster/ToasterComponent';
 
 export default function RootLayout({
   children,
@@ -18,7 +19,10 @@ export default function RootLayout({
       </head>
       <UserProvider>
         <MovieProvider>
-          <body className={akaya_kanadaka.className}>{children}</body>
+          <body className={akaya_kanadaka.className}>
+            <ToasterComponent />
+            {children}
+          </body>
         </MovieProvider>
       </UserProvider>
     </html>
