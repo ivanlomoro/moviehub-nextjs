@@ -1,7 +1,9 @@
+'use client'
 import React, { useState, ChangeEvent, useEffect } from 'react';
 import './Modal.styles.css'
 import { IoMdClose } from "react-icons/io";
 import { toast } from 'react-hot-toast';
+import { uploadRequest } from '@/services/request.service';
 
 interface ModalProps {
   isOpen: boolean;
@@ -43,19 +45,59 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onCreateMovie }) => {
     }));
   };
 
-  const handleCreateMovie = () => {
-    onCreateMovie(newMovie);
-    onClose();
-    toast.success('Movie added successfully!');
+
+
+  const [file, setFile] = useState<File>()
+  console.log(file)
+
+  const handleFileInput = async (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files !== null) {
+      const file = e.target.files[0];
+
+      try {
+        const imageUrl = await uploadRequest(file);
+
+        if (imageUrl) {
+          toast.success('Imagen cargada exitosamente');
+          setNewMovie((prevMovie) => ({
+            ...prevMovie,
+            poster_image: imageUrl,
+          }));
+          toast.success('Imagen cargada exitosamente');
+        } else {
+          toast.error('Error al cargar la imagen');
+        }
+      } catch (error) {
+        console.error('Error al procesar la carga del archivo:', error);
+        toast.error('Error al cargar la imagen');
+      }
+    }
   };
 
-  const genreOptions = ['Action', 'Comedy', 'Drama', 'Fantasy', 'Horror', 'Sci-Fi', 'Thriller','Suspense', 'Other'];
+  const handleCreateMovie = async () => {
+    if (!newMovie.poster_image) {
+      toast.error('Por favor, carga una imagen antes de crear la película.');
+      return;
+    }
+    try {
+      await onCreateMovie(newMovie);
+      onClose();
+      toast.success('Película añadida exitosamente!');
+    } catch (error) {
+      console.error('Error al crear la película:', error);
+      toast.error('Error al crear la película.');
+    }
+  };
+
+  const genreOptions = ['Action', 'Comedy', 'Drama', 'Fantasy', 'Horror', 'Sci-Fi', 'Thriller', 'Suspense', 'Other'];
 
   return (
     <div className={`modal-overlay ${isOpen ? 'open' : ''}`}>
       <div className="modal-movie">
         <input type="text" name="title" placeholder='Title' value={newMovie.title} onChange={handleInputChange} />
-        <input type="text" name="poster_image" placeholder='Poster' value={newMovie.poster_image} onChange={handleInputChange} />
+        {/* <input type="text" name="poster_image" placeholder='Poster' value={newMovie.poster_image} onChange={handleInputChange} /> */}
+        <input accept="image/*" type="file" onChange={handleFileInput} />
+        <span>{newMovie.poster_image && `Selected file: ${newMovie.poster_image}`}</span>
         <input
           type="text"
           placeholder="Rate (1-10)"
