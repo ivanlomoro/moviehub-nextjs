@@ -5,6 +5,8 @@ import './EditForm.styles.css';
 import { toast } from 'react-hot-toast';
 import { useMovieContext } from '@/context/MovieContext';
 import { Movie, getMovieById, updateMovieById } from '@/services/movie.service';
+import { uploadRequest } from '@/services/request.service';
+import Image from 'next/image';
 
 interface EditFormProps {
   movieId: string | undefined;
@@ -45,6 +47,29 @@ const EditForm: React.FC<EditFormProps> = ({ movieId, onClose }) => {
     }));
   };
 
+  const handleFileInput = async (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files !== null) {
+      const file = e.target.files[0];
+
+      try {
+        const imageUrl = await uploadRequest(file);
+
+        if (imageUrl) {
+          setEditedMovie((prevMovie) => ({
+            ...prevMovie,
+            poster_image: imageUrl,
+          }));
+          toast.success('Image uploaded successfully');
+        } else {
+          toast.error('Error loading image');
+        }
+      } catch (error) {
+        console.error('Error processing file upload:', error);
+        toast.error('Error loading image');
+      }
+    }
+  };
+
   const handleUpdateClick = async () => {
     try {
       await updateMovieById(movieId || '', editedMovie as Movie);
@@ -56,19 +81,26 @@ const EditForm: React.FC<EditFormProps> = ({ movieId, onClose }) => {
     }
   };
 
-  const genreOptions = ['Action', 'Comedy', 'Drama', 'Fantasy', 'Horror', 'Sci-Fi', 'Thriller','Suspense', 'Other'];
+  const genreOptions = ['Action', 'Comedy', 'Drama', 'Fantasy', 'Horror', 'Sci-Fi', 'Thriller', 'Suspense', 'Other'];
 
   return (
     <div className="edit-form-overlay">
       <div className="edit-form">
         <input type="text" name="title" placeholder="Title" value={editedMovie.title} onChange={handleInputChange} />
-        <input
-          type="text"
-          name="poster_image"
-          placeholder="Poster"
-          value={editedMovie.poster_image}
-          onChange={handleInputChange}
-        />
+        {editedMovie.poster_image && (
+          <Image src={editedMovie.poster_image} alt="Selected file" className="thumbnail" width={200} height={200} />
+        )}
+        <div className="custom-file-input-container">
+          <label htmlFor="file-input-edit" className="custom-file-input-label">
+            Change cover
+          </label>
+          <input
+            id="file-input-edit"
+            accept="image/*"
+            type="file"
+            onChange={handleFileInput}
+          />
+        </div>
         <input
           type="text"
           placeholder="Rate (1-10)"

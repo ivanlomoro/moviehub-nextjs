@@ -4,6 +4,7 @@ import './Modal.styles.css'
 import { IoMdClose } from "react-icons/io";
 import { toast } from 'react-hot-toast';
 import { uploadRequest } from '@/services/request.service';
+import Image from 'next/image';
 
 interface ModalProps {
   isOpen: boolean;
@@ -58,34 +59,33 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onCreateMovie }) => {
         const imageUrl = await uploadRequest(file);
 
         if (imageUrl) {
-          toast.success('Imagen cargada exitosamente');
           setNewMovie((prevMovie) => ({
             ...prevMovie,
             poster_image: imageUrl,
           }));
-          toast.success('Imagen cargada exitosamente');
+          toast.success('Image uploaded successfully');
         } else {
-          toast.error('Error al cargar la imagen');
+          toast.error('Error loading image');
         }
       } catch (error) {
-        console.error('Error al procesar la carga del archivo:', error);
-        toast.error('Error al cargar la imagen');
+        console.error('Error processing file upload:', error);
+        toast.error('Error loading image');
       }
     }
   };
 
   const handleCreateMovie = async () => {
     if (!newMovie.poster_image) {
-      toast.error('Por favor, carga una imagen antes de crear la película.');
+      toast.error('Please upload an image before creating the movie.');
       return;
     }
     try {
       await onCreateMovie(newMovie);
       onClose();
-      toast.success('Película añadida exitosamente!');
+      toast.success('Movie added successfully!');
     } catch (error) {
-      console.error('Error al crear la película:', error);
-      toast.error('Error al crear la película.');
+      console.error('Error creating movie:', error);
+      toast.error('Error creating movie.');
     }
   };
 
@@ -95,9 +95,26 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onCreateMovie }) => {
     <div className={`modal-overlay ${isOpen ? 'open' : ''}`}>
       <div className="modal-movie">
         <input type="text" name="title" placeholder='Title' value={newMovie.title} onChange={handleInputChange} />
-        {/* <input type="text" name="poster_image" placeholder='Poster' value={newMovie.poster_image} onChange={handleInputChange} /> */}
         <input accept="image/*" type="file" onChange={handleFileInput} />
-        <span>{newMovie.poster_image && `Selected file: ${newMovie.poster_image}`}</span>
+        {newMovie.poster_image ? (
+          <Image src={newMovie.poster_image} alt="Selected file" className="thumbnail" width={200} height={200} />
+        ) : (
+          <div className="default-image-container">
+            <Image src="https://res.cloudinary.com/dgxkfjsbz/image/upload/v1702641917/moviehub/Logo/moviehat_rrk7x2.png" alt="Default" className="default-image" width={200} height={200} />
+          </div>
+        )}
+
+        <div className="custom-file-input-container">
+          <label htmlFor="file-input-modal" className="custom-file-input-label">
+            Add cover
+          </label>
+          <input
+            id="file-input-modal"
+            accept="image/*"
+            type="file"
+            onChange={handleFileInput}
+          />
+        </div>
         <input
           type="text"
           placeholder="Rate (1-10)"

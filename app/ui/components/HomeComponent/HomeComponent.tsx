@@ -118,6 +118,14 @@ const HomeComponent: React.FC = () => {
                             modifier: 1,
                             slideShadows: false,
                         }}
+                        breakpoints={{
+                            300:{
+                                slidesPerView: 1
+                            },
+                            576: {
+                                slidesPerView: 4,
+                            },
+                        }}
                         modules={[EffectCoverflow, Pagination]}
                         className="mySwiper"
                     >

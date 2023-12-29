@@ -113,3 +113,49 @@
   color: var(--background-color);
   transition: 0.5s;
 }
+
+input[type="file"] {
+  display: none;
+}
+
+.custom-file-input-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.custom-file-input-label {
+  flex-direction:initial;
+  text-decoration: none;
+  margin-right: 1rem;
+  margin-top: 1rem;
+  font-size: 20px;
+  color: var(--background-color-secondary);
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.custom-file-input-label:hover {
+  transition: 0.5;
+  color: var(--secondary-color);
+}
+
+#file-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+
+@media (max-width: 575px) {
+  .edit-form{
+    margin: 1rem;
+  }
+  .thumbnail {
+    width: 100px;
+    height: 100px; 
+  }
+}

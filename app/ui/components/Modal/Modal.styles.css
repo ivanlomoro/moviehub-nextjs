@@ -117,3 +117,13 @@
   color: var(--background-color);
   transition: 0.5s;
 }
+
+@media (max-width: 575px) {
+  .modal-movie{
+    margin: 1rem;
+  }
+  .thumbnail {
+    width: 100px;
+    height: 100px; 
+  }
+}
