@@ -48,8 +48,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onCreateMovie }) => {
 
 
 
-  const [file, setFile] = useState<File>()
-  console.log(file)
+ 
 
   const handleFileInput = async (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files !== null) {
