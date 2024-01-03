@@ -5,6 +5,7 @@ import { IoMdClose } from "react-icons/io";
 import { toast } from 'react-hot-toast';
 import { uploadRequest } from '@/services/request.service';
 import Image from 'next/image';
+import { Movie, User } from '@/context/MovieContext';
 
 interface ModalProps {
   isOpen: boolean;
@@ -12,11 +13,12 @@ interface ModalProps {
   onCreateMovie: (newMovie: NewMovie) => void;
 }
 
-interface NewMovie {
+export interface NewMovie {
   title: string;
   poster_image: string;
   score: number;
   genre: string;
+  registerUser: User;
 }
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onCreateMovie }) => {
@@ -25,6 +27,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onCreateMovie }) => {
     poster_image: '',
     score: 0,
     genre: '',
+    registerUser: { id: '', name: '', email: '' },
   });
 
   useEffect(() => {
@@ -34,6 +37,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onCreateMovie }) => {
         poster_image: '',
         score: 0,
         genre: '',
+        registerUser: { id: '', name: '', email: '' },
       });
     }
   }, [isOpen]);
@@ -45,10 +49,6 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onCreateMovie }) => {
       [name]: value,
     }));
   };
-
-
-
- 
 
   const handleFileInput = async (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files !== null) {

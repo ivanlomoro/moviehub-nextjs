@@ -3,8 +3,9 @@ import React, { createContext, useContext, ReactNode, useState, useEffect } from
 import { createMovie as createMovieAPI, getAllMoviesByUserId as getAllMoviesByUserIdAPI } from '../services/movie.service';
 import { useUser } from '@auth0/nextjs-auth0/client';
 import { createUser } from '@/services/user.service';
+import { NewMovie } from '@/app/ui/components/Modal/Modal';
 
-interface Movie {
+export interface Movie {
     title: string;
     poster_image: string;
     score: number;
@@ -12,7 +13,7 @@ interface Movie {
     id: string;
 }
 
-interface User {
+export interface User {
     id: string;
     name: string;
     email: string;
@@ -23,7 +24,7 @@ interface User {
 interface MovieContextProps {
     movies: Movie[];
     fetchMovies: () => void;
-    createMovie: (newMovie: Omit<Movie, 'userId'> & { registerUser: User }) => Promise<void>;
+    createMovie: (newMovie: NewMovie) => Promise<void>;
 }
 
 const MovieContext = createContext<MovieContextProps | undefined>(undefined);
@@ -72,12 +73,13 @@ export const MovieProvider: React.FC<MovieProviderProps> = ({ children }) => {
         }
     };
 
-    const createMovie = async (newMovie: Omit<Movie, 'userId'> & { registerUser: User }): Promise<void> => {
+    const createMovie = async (newMovie: NewMovie): Promise<void> => {
         if (registerUser) {
             await createMovieAPI({ ...newMovie, userId: registerUser.id });
             fetchData();
         }
     };
+    
 
     const contextValue: MovieContextProps = {
         movies,
