@@ -13,7 +13,7 @@ export function Header() {
     return (
         <header>
             <div className="container">
-                <Link href="/home">
+                <Link href="/">
                     <Image src="https://res.cloudinary.com/dgxkfjsbz/image/upload/v1702641917/moviehub/Logo/moviehat_rrk7x2.png" alt="Icono" width={180} height={150} priority/>
                 </Link>
                 <div className="cart">
