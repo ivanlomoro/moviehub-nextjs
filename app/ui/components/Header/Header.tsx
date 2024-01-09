@@ -20,7 +20,7 @@ export function Header() {
                     {user && (
                         <>
                             <span className="user-info">
-                                Welcome back {user?.name} !
+                                WelcomeTEST back {user?.name} !
                             </span>
                             <div className="user-icon">
                                 <Image src={user.picture || ""} alt={user.name || ""} width={48} height={48} />
