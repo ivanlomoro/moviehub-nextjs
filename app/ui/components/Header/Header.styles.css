@@ -59,13 +59,13 @@ header .login {
 }
 
 .user-icon {
-    background-color: var(--secondaty-color);
+    background-color: var(--secondary-color);
     border-radius: 50%;
     display: inline-flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    margin-right: 2rem;
+    margin-right: 0.5rem;
 }
 
 .user-icon img {
@@ -114,6 +114,69 @@ header .login {
     font-size: 35px;
 }
 
+.tooltip-container {
+    background-color: var(--background-color-secondary);
+    position: relative;
+    cursor: pointer;
+    font-size: 17px;
+    padding: 0.7em 0.7em;
+    border-radius: 50px;
+}
+
+.tooltip1 {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    visibility: hidden;
+    padding: 5px;
+    border-radius: 50px;
+    z-index: 1;
+}
+
+.tooltip-container:hover .tooltip1 {
+    top: 100%;
+    opacity: 1;
+    visibility: visible;
+    border-radius: 50px;
+    transform: translate(-50%, -5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tooltip-container:hover .tooltip1:hover {
+    background-color: var(--primary-color);
+}
+
+.tooltip2 {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    visibility: hidden;
+    padding: 5px;
+    border-radius: 50px;
+    z-index: 1;
+}
+
+.tooltip-container:hover .tooltip2 {
+    top: -60%;
+    opacity: 1;
+    visibility: visible;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tooltip-container:hover .tooltip2:hover {
+    background-color: var(--primary-color);
+}
+
+
 @media screen and (max-width: 768px) {
     .container {
         max-width: 100%;
@@ -143,7 +206,7 @@ header .login {
     .user-icon {
         width: 3rem;
         height: 3rem;
-        margin-right: 0.2rem;
+        margin-right: 0.6rem;
     }
 
     .nav-text {
@@ -164,10 +227,10 @@ header .login {
 
     .logout-icon {
         font-size: 30px;
-        margin-left: 0.5rem;
     }
 
     .cart-icon {
         font-size: 20px;
     }
+
 }

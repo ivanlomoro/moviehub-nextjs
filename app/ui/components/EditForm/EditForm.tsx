@@ -7,6 +7,7 @@ import { useMovieContext } from '@/context/MovieContext';
 import { Movie, getMovieById, updateMovieById } from '@/services/movie.service';
 import { uploadRequest } from '@/services/request.service';
 import Image from 'next/image';
+import { useTranslation } from "react-i18next";
 
 interface EditFormProps {
   movieId: string | undefined;
@@ -15,6 +16,7 @@ interface EditFormProps {
 
 const EditForm: React.FC<EditFormProps> = ({ movieId, onClose }) => {
   const { fetchMovies } = useMovieContext();
+  const { t } = useTranslation();
 
   const [editedMovie, setEditedMovie] = useState<Partial<Movie>>({
     title: '',
@@ -59,13 +61,13 @@ const EditForm: React.FC<EditFormProps> = ({ movieId, onClose }) => {
             ...prevMovie,
             poster_image: imageUrl,
           }));
-          toast.success('Image uploaded successfully');
+          toast.success(t("Image uploaded successfully"));
         } else {
-          toast.error('Error loading image');
+          toast.error(t("Error loading image"));
         }
       } catch (error) {
-        console.error('Error processing file upload:', error);
-        toast.error('Error loading image');
+        console.error(t("Error processing file upload:"), error);
+        toast.error(t("Error loading image"));
       }
     }
   };
@@ -75,24 +77,24 @@ const EditForm: React.FC<EditFormProps> = ({ movieId, onClose }) => {
       await updateMovieById(movieId || '', editedMovie as Movie);
       onClose();
       fetchMovies();
-      toast.success('Movie updated successfully!');
+      toast.success(t("Movie updated successfully!"));
     } catch (error) {
-      console.error('Error updating movie', error);
+      console.error(t("Error updating movie"), error);
     }
   };
 
-  const genreOptions = ['Action', 'Comedy', 'Drama', 'Fantasy', 'Horror', 'Sci-Fi', 'Thriller', 'Suspense', 'Other'];
+  const genreOptions = [t("Action"), t("Comedy"), "Drama", t("Fantasy"), t("Horror"), t("Sci-Fi"), t("Thriller"), t("Romance"), t("Other")];
 
   return (
     <div className="edit-form-overlay">
       <div className="edit-form">
-        <input type="text" name="title" placeholder="Title" value={editedMovie.title} onChange={handleInputChange} />
+        <input type="text" name="title" placeholder={t("Title")} value={editedMovie.title} onChange={handleInputChange} />
         {editedMovie.poster_image && (
-          <Image src={editedMovie.poster_image} alt="Selected file" className="thumbnail" width={200} height={200} />
+          <Image src={editedMovie.poster_image} alt={t("Selected file")} className="thumbnail" width={200} height={200} />
         )}
         <div className="custom-file-input-container">
           <label htmlFor="file-input-edit" className="custom-file-input-label">
-            Change cover
+            {t("Change cover")}
           </label>
           <input
             id="file-input-edit"
@@ -103,7 +105,7 @@ const EditForm: React.FC<EditFormProps> = ({ movieId, onClose }) => {
         </div>
         <input
           type="text"
-          placeholder="Rate (1-10)"
+          placeholder={t("Rate (1-10)")}
           value={editedMovie.score === 0 ? '' : String(editedMovie.score)}
           onChange={(e) => {
             const inputValue = e.target.value;
@@ -114,7 +116,7 @@ const EditForm: React.FC<EditFormProps> = ({ movieId, onClose }) => {
         />
         <select name="genre" value={editedMovie.genre} onChange={handleInputChange}>
           <option value="" disabled>
-            Select Genre
+            {t("Select Genre")}
           </option>
           {genreOptions.map((genre, index) => (
             <option key={index} value={genre}>
@@ -123,7 +125,7 @@ const EditForm: React.FC<EditFormProps> = ({ movieId, onClose }) => {
           ))}
         </select>
         <button className="update-button" onClick={handleUpdateClick}>
-          Update Movie
+          {t("Update Movie")}
         </button>
         <button className="close-update-button" onClick={onClose}>
           <IoMdClose />

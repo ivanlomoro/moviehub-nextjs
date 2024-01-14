@@ -13,6 +13,7 @@ import EditForm from '../EditForm/EditForm';
 import Loader from '../Loader/Loader';
 import { deleteMovieById } from '@/services/movie.service';
 import { useMovieContext } from '@/context/MovieContext';
+import { useTranslation } from "react-i18next";
 
 const HomeComponent: React.FC = () => {
     const { movies, createMovie, fetchMovies } = useMovieContext();
@@ -20,6 +21,7 @@ const HomeComponent: React.FC = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isEditFormOpen, setIsEditFormOpen] = useState(false);
     const [selectedMovieId, setSelectedMovieId] = useState<string | undefined>(undefined);
+    const { t } = useTranslation();
 
     const openModal = () => {
         setIsModalOpen(true);
@@ -49,39 +51,41 @@ const HomeComponent: React.FC = () => {
                 }, 1500);
             }
         };
-    
+
         if (movies.length === 0) {
             loadData();
         }
     }, [fetchMovies, movies]);
-    
+
 
     const handleDeleteMovie = async (movieId: string) => {
+        
         try {
             const result = await Swal.fire({
-                title: 'Are you sure delete this movie?',
-                text: 'You won\'t be able to revert this.',
+                title: t("Are you sure delete this movie?"),
+                text: t("You won't be able to revert this."),
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#FF3B4B',
                 cancelButtonColor: '#677580',
-                confirmButtonText: 'Yes, delete it!'
+                confirmButtonText: t("Yes, delete it!"),
+                cancelButtonText: t("Cancel"),
             });
 
             if (result.isConfirmed) {
                 await deleteMovieById(movieId);
                 fetchMovies();
                 Swal.fire(
-                    'Deleted!',
-                    'Your movie has been deleted.',
+                    t("Deleted!"),
+                    t("Your movie has been deleted."),
                     'success'
                 );
             }
         } catch (error) {
-            console.error('Error deleting movie', error);
+            console.error(t("Error deleting movie"), error);
             Swal.fire(
                 'Error',
-                'There was an error trying to delete the movie.',
+                t("There was an error trying to delete the movie."),
                 'error'
             );
         }
@@ -90,7 +94,7 @@ const HomeComponent: React.FC = () => {
     return (
         <div>
             <div className="title-and-button-container">
-                <h1 className='title-home'>{movies.length > 0 ? 'Your added movies ' : 'No movies added '}</h1>
+                <h1 className='title-home'>{movies.length > 0 ? t("Your added movies ") : t("No movies added ")}</h1>
                 <div>
                     <button className="icon-button" onClick={openModal}>
                         <FaCirclePlus className="add-icon" />
@@ -100,7 +104,7 @@ const HomeComponent: React.FC = () => {
             </div>
 
             {isLoading ? (
-                <Loader /> 
+                <Loader />
             ) : (
                 <div className='container-swiper'>
                     <Swiper
@@ -119,7 +123,7 @@ const HomeComponent: React.FC = () => {
                             slideShadows: false,
                         }}
                         breakpoints={{
-                            300:{
+                            300: {
                                 slidesPerView: 1
                             },
                             576: {

@@ -6,6 +6,7 @@ import { toast } from 'react-hot-toast';
 import { uploadRequest } from '@/services/request.service';
 import Image from 'next/image';
 import { Movie, User } from '@/context/MovieContext';
+import { useTranslation } from "react-i18next";
 
 interface ModalProps {
   isOpen: boolean;
@@ -29,6 +30,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onCreateMovie }) => {
     genre: '',
     registerUser: { id: '', name: '', email: '' },
   });
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (isOpen) {
@@ -62,41 +64,41 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onCreateMovie }) => {
             ...prevMovie,
             poster_image: imageUrl,
           }));
-          toast.success('Image uploaded successfully');
+          toast.success(t("Image uploaded successfully"));
         } else {
-          toast.error('Error loading image');
+          toast.error(t("Error loading image"));
         }
       } catch (error) {
-        console.error('Error processing file upload:', error);
-        toast.error('Error loading image');
+        console.error(t("Error processing file upload:"), error);
+        toast.error(t("Error loading image"));
       }
     }
   };
 
   const handleCreateMovie = async () => {
     if (!newMovie.poster_image) {
-      toast.error('Please upload an image before creating the movie.');
+      toast.error(t("Please upload an image before creating the movie."));
       return;
     }
     try {
       await onCreateMovie(newMovie);
       onClose();
-      toast.success('Movie added successfully!');
+      toast.success(t("Movie added successfully!"));
     } catch (error) {
-      console.error('Error creating movie:', error);
-      toast.error('Error creating movie.');
+      console.error(t("Error creating movie:"), error);
+      toast.error(t("Error creating movie."));
     }
   };
 
-  const genreOptions = ['Action', 'Comedy', 'Drama', 'Fantasy', 'Horror', 'Sci-Fi', 'Thriller', 'Suspense', 'Other'];
+  const genreOptions = [t("Action"), t("Comedy"), "Drama", t("Fantasy"), t("Horror"), t("Sci-Fi"), t("Thriller"), t("Romance"), t("Other")];
 
   return (
     <div className={`modal-overlay ${isOpen ? 'open' : ''}`}>
       <div className="modal-movie">
-        <input type="text" name="title" placeholder='Title' value={newMovie.title} onChange={handleInputChange} />
+        <input type="text" name="title" placeholder={t("Title")} value={newMovie.title} onChange={handleInputChange} />
         <input accept="image/*" type="file" onChange={handleFileInput} />
         {newMovie.poster_image ? (
-          <Image src={newMovie.poster_image} alt="Selected file" className="thumbnail" width={200} height={200} />
+          <Image src={newMovie.poster_image} alt={t("Selected file")} className="thumbnail" width={200} height={200} />
         ) : (
           <div className="default-image-container">
             <Image src="https://res.cloudinary.com/dgxkfjsbz/image/upload/v1702641917/moviehub/Logo/moviehat_rrk7x2.png" alt="Default" className="default-image" width={200} height={200} />
@@ -105,7 +107,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onCreateMovie }) => {
 
         <div className="custom-file-input-container">
           <label htmlFor="file-input-modal" className="custom-file-input-label">
-            Add cover
+            {t("Add cover")}
           </label>
           <input
             id="file-input-modal"
@@ -116,7 +118,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onCreateMovie }) => {
         </div>
         <input
           type="text"
-          placeholder="Rate (1-10)"
+          placeholder={t("Rate (1-10)")}
           value={newMovie.score === 0 ? '' : String(newMovie.score)}
           onChange={(e) => {
             const inputValue = e.target.value;
@@ -126,7 +128,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onCreateMovie }) => {
           }}
         />
         <select name="genre" value={newMovie.genre} onChange={handleInputChange}>
-          <option value="" disabled>Select Genre</option>
+          <option value="" disabled>{t("Select Genre")}</option>
           {genreOptions.map((genre, index) => (
             <option key={index} value={genre}>
               {genre}
@@ -135,7 +137,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onCreateMovie }) => {
         </select>
 
         <button className="create-button" onClick={handleCreateMovie}>
-          Add movie
+          {t("Add movie")}
         </button>
         <button className="close-button" onClick={onClose}>
           <IoMdClose />
