@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<div align="center">
+  <img src="https://res.cloudinary.com/dgxkfjsbz/image/upload/v1702641917/moviehub/Logo/moviehat_rrk7x2.png" alt="MovieHat" width="300">
+</div>
 
-## Getting Started
+# MovieHat 🎬
 
-First, run the development server:
+## Introduction
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Welcome to the [MovieHub Frontend repository](https://github.com/ivanlomoro/moviehub-nextjs), a component of the comprehensive MovieHub application designed for movie list management. The project has been restructured into two separate repositories – one for the frontend and another for the backend. This repository is dedicated to the frontend, developed using Next.js, and is deployed on [Vercel](https://vercel.com/) for effortless hosting. Additionally, [Cloudinary](https://cloudinary.com/) is utilized for efficient media management.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Responsive and interactive user interface.
+- Seamless integration with the [backend](https://github.com/ivanlomoro/moviehub-nextjs-backend) for CRUD operations on movies.
+- User authentication and authorization through [Auth0](https://auth0.com/).
+- Enhanced user experience with Next.js features.
+- Automatic deployment using [Vercel](https://vercel.com/) for quick updates.
+- Media storage and management through [Cloudinary](https://cloudinary.com/).
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Requirements
 
-## Learn More
+- Node.js and npm installed.
+- Basic knowledge of JavaScript and TypeScript.
+- Familiarity with frontend development concepts.
+- Access to the [MovieHub Backend repository](https://github.com/ivanlomoro/moviehub-nextjs-backend).
 
-To learn more about Next.js, take a look at the following resources:
+## Installation and Setup
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Clone this repository: `git clone https://github.com/ivanlomoro/moviehub-nextjs.git`
+2. Navigate to the client folder: `cd moviehub-nextjs`
+3. Install dependencies: `pnpm install`
+4. Configure frontend environment variables.
+5. Run the development server: `pnpm dev`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Usage
+Access the MovieHub frontend application at http://localhost:your_port.
 
-## Deploy on Vercel
+## Deployment
+The MovieHub Frontend is automatically deployed on [Vercel](https://vercel.com/). Any changes pushed to the main branch trigger an automatic update of the deployed application.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Technologies and Concepts
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Next.js for frontend development.
+- TypeScript for type-safe JavaScript.
+- [Auth0](https://auth0.com/) for secure user authentication.
+- Integration with the [MovieHub Backend repository](https://github.com/ivanlomoro/moviehub-nextjs-backend).
+- MVC (Model-View-Controller) design pattern.
+- [Vercel](https://vercel.com/) for efficient and automatic deployment.
+- [Cloudinary](https://cloudinary.com/) for media storage and management.
