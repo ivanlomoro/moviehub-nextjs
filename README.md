@@ -47,3 +47,12 @@ The MovieHub Frontend is automatically deployed on [Vercel](https://vercel.com/)
 - MVC (Model-View-Controller) design pattern.
 - [Vercel](https://vercel.com/) for efficient and automatic deployment.
 - [Cloudinary](https://cloudinary.com/) for media storage and management.
+
+## Preview
+
+<table>
+  <tr>
+    <td><img src="./app/assets/MovieHat_desktop.gif" alt="Desktop Version" width="400"/></td>
+    <td><img src="./app/assets/MovieHat_mobile.gif" alt="Mobile Version" width="400"/></td>
+  </tr>
+</table>
